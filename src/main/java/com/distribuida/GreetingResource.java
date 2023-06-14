@@ -9,7 +9,6 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
-
 @Path("/Persona")
 public class GreetingResource {
 
@@ -26,7 +25,7 @@ public class GreetingResource {
     }
 
     @GET
-    @Path("/listar")
+    @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     /*public Message hello() {
@@ -36,6 +35,14 @@ public class GreetingResource {
         return Persona.listAll();
     }
 
+    @GET
+    @Path("/id")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Persona personaId(@PathParam("id") Long id) {
+        Persona persona = Persona.findById(id);
+        return persona;
+    }
     @POST
     @Path("/crear")
     @Consumes(MediaType.APPLICATION_JSON)
