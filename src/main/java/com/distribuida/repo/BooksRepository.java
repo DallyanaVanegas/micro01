@@ -1,9 +1,9 @@
 package com.distribuida.repo;
 
+import com.distribuida.db.Book;
 import com.distribuida.db.Persona;
 import com.google.gson.Gson;
 import io.lettuce.core.RedisClient;
-import io.lettuce.core.api.StatefulRedisConnection;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -11,9 +11,9 @@ import jakarta.inject.Inject;
 import java.util.Optional;
 
 @ApplicationScoped
-public class PersonasRepository implements PanacheRepository<Persona> {
+public class BookRepository implements PanacheRepository<Book> {
 
-    @Inject
+    /*@Inject
     RedisClient redisClient; //<- llamo al metodo para que imprima el url
     public Optional<Persona> findByIdOptionalCache(Long id){
         /**
@@ -34,7 +34,7 @@ public class PersonasRepository implements PanacheRepository<Persona> {
            ex.printStackTrace();
         }finally{
         }
-        */
+        //aqui cerrar
 
         try(var conn = redisClient.connect()){
             var commands = conn.sync();
@@ -57,5 +57,5 @@ public class PersonasRepository implements PanacheRepository<Persona> {
             ex.printStackTrace();
         }
         return  Optional.empty();
-    }
+    }*/
 }
