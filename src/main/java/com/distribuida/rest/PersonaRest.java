@@ -19,14 +19,10 @@ public class PersonaRest {
 
     Logger logger = LoggerFactory.getLogger(PersonaRest.class);
 
-    @Inject
-    PersonasRepository repo;
+    @Inject PersonasRepository repo;
     @GET
-    /*public Message hello() {
-        return new Message();
-    }*/
     public List<Persona> listarPersonas() {
-        return Persona.listAll();
+        return repo.listAll();
     }
 
     @GET
@@ -46,7 +42,7 @@ public class PersonaRest {
     }
     @POST
     public Response crearPersona(Persona persona) {
-        persona.persist();
+        repo.persist(persona);
 
         return Response.status(Response.Status.CREATED)
                 .entity(persona)
@@ -54,30 +50,18 @@ public class PersonaRest {
     }
 
     @PUT
-    @Path("/{id}")
+    @Path(value="/{id}")
     public Response actualizarPersona(@PathParam("id") Long id, Persona updatedPersona) {
-        Persona persona = Persona.findById(id);
+        Persona persona = repo.findById(id);
 
-        if (persona != null) {
-            persona.setName(updatedPersona.getName());
-            persona.persist();
-
-            return Response.ok(persona).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+        persona.setName(updatedPersona.getName());
+        repo.persistAndFlush(persona);
+        return Response.ok().build();
     }
 
     @DELETE
-    @Path("/{id}")
-    public Response borrarPersona(@PathParam("id") Long id) {
-        Persona persona = Persona.findById(id);
-        if (persona != null) {
-            persona.delete();
-
-            return Response.ok().build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+    @Path(value="/{id}")
+    public void borrarPersona(@PathParam("id") Long id) {
+        repo.findById(id);
     }
 }

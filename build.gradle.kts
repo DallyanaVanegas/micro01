@@ -23,8 +23,7 @@ dependencies {
     implementation("io.quarkus:quarkus-config-yaml")
 
     implementation("io.lettuce:lettuce-core:6.2.4.RELEASE")
-
-
+    implementation("com.google.code.gson:gson:2.10.1")
 }
 
 java{
